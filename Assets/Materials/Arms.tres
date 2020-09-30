@@ -1,0 +1,13 @@
+[gd_resource type="SpatialMaterial" format=2]
+
+[resource]
+flags_ensure_correct_normals = true
+params_diffuse_mode = 1
+params_specular_mode = 2
+albedo_color = Color( 0.180392, 0.419608, 0.67451, 1 )
+metallic = 0.58
+metallic_specular = 0.0
+roughness = 0.88
+rim_enabled = true
+rim = 0.11
+rim_tint = 0.0

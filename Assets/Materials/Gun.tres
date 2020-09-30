@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Textures/metal_yellow.jpg" type="Texture" id=1]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+metallic_specular = 0.74
+roughness = 0.72
+rim_enabled = true
+rim = 0.85
+rim_tint = 0.84

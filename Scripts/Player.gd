@@ -31,11 +31,11 @@ var is_on_floor = false
 var is_wallrunning = false
 var wallrun_exit_direction = Vector3.ZERO
 
+var can_shoot = true
 var wallrun_strafe = 0
 var wallrun_direction = Vector3.ZERO
 var direction : Vector3 = Vector3.ZERO
-
-var anim_tree_state = {}
+var bullet_scene = load("res://Scenes/BULLET.tscn")
 
 func _ready():
 	mode = MODE_CHARACTER
@@ -66,10 +66,9 @@ func _input(event):
 		$Camera.rotation_degrees.x = pitch
 
 func _process(delta):
-	
-	$Camera/ViewportContainer/Viewport/Camera.global_transform.origin = $Camera.global_transform.origin
 	$Camera/ViewportContainer/Viewport/Camera.rotation = $Camera.rotation
-	$Camera/ViewportContainer/Viewport/PLAYER_RIG.global_transform.origin = $Camera.global_transform.origin
+	$Camera/ViewportContainer/Viewport/Camera.global_transform.origin = $Camera.global_transform.origin
+	$Camera/ViewportContainer/Viewport/PLAYER_RIG.global_transform.origin = $Camera.global_transform.origin + $Camera/ViewportContainer/Viewport/PLAYER_RIG.global_transform.basis.z * 0.75
 	$Camera/ViewportContainer/Viewport/PLAYER_RIG.global_transform.basis = $Camera/ViewportContainer/Viewport/PLAYER_RIG.global_transform.basis.slerp($Camera.global_transform.basis, delta * ARM_ROTATION_SPEED)
 	$Camera/ViewportContainer/Viewport/PLAYER_RIG.rotation = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG.rotation, $Camera/ViewportContainer/Viewport/PLAYER_RIG.rotation + Vector3(pitch * 0.001, 0, 0), delta * 5.0)
 	
@@ -88,10 +87,14 @@ func _process(delta):
 	if Input.is_key_pressed(KEY_S):
 		direction += $Camera.global_transform.basis.z
 		
-	if Input.is_mouse_button_pressed(1):
+	if Input.is_mouse_button_pressed(1) and can_shoot:
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/shoot/active", true)
 		get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/AnimationPlayer").play("gun_shooting")
-		
+		var new_bullet = bullet_scene.instance()
+		new_bullet.direction = (get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin - $Camera.global_transform.basis.z * 500.0).normalized()
+		get_node("/root").add_child(new_bullet)
+		new_bullet.global_transform.origin = get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin
+		can_shoot = false
 	if Input.is_action_just_pressed("reload"):
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/reload/active", true)
 		get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/AnimationPlayer").play("gun_reloading")
@@ -101,8 +104,8 @@ func _process(delta):
 	$Camera.rotation_degrees.z = lerp($Camera.rotation_degrees.z, wallrun_strafe + int(is_on_floor) * -direction.x * MAX_STRAFE_CAM_ANGLE, delta * MAX_STRAFE_CAM_SPEED)
 	
 	if linear_velocity.length() > 10.0 and (is_wallrunning or is_on_floor):
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.15 * sin(0.008 * OS.get_ticks_msec()), delta * 5.0)
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.15 * sin(0.008 * OS.get_ticks_msec()), delta * 5.0)
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.15 * sin(((0.005 * int(is_wallrunning)) + 0.008) * OS.get_ticks_msec()), delta * 5.0)
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.15 * sin(((0.005 * int(is_wallrunning) + 0.008)) * OS.get_ticks_msec()), delta * 5.0)
 	else:
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.0, delta * 5.0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.0, delta * 5.0)
@@ -178,3 +181,7 @@ func on_collision(body):
 func on_collision_exit(body):
 	if body.is_in_group("floor"):
 		is_on_floor = false
+
+func show_muzzle():
+	$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".visible = true
+	$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".rotation_degrees.z = randf()*360.0+0.0
