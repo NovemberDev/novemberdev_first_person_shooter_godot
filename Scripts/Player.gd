@@ -32,6 +32,7 @@ var is_wallrunning = false
 var wallrun_exit_direction = Vector3.ZERO
 
 var can_shoot = true
+var can_reload = true
 var wallrun_strafe = 0
 var wallrun_direction = Vector3.ZERO
 var direction : Vector3 = Vector3.ZERO
@@ -94,10 +95,19 @@ func _process(delta):
 		new_bullet.direction = (get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin - $Camera.global_transform.basis.z * 500.0).normalized()
 		get_node("/root").add_child(new_bullet)
 		new_bullet.global_transform.origin = get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin
+		can_reload = false
 		can_shoot = false
-	if Input.is_action_just_pressed("reload"):
+	if Input.is_action_just_pressed("reload") and can_reload:
+		can_shoot = false
+		can_reload = false
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/reload/active", true)
+		$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".visible = false
 		get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/AnimationPlayer").play("gun_reloading")
+	
+	if Input.is_key_pressed(KEY_SHIFT) and !is_on_floor and !is_wallrunning:
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegTree.set("parameters/leg_state/current", 2)
+	else:
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegTree.set("parameters/leg_state/current", 0)
 	
 	direction += wallrun_exit_direction
 	
