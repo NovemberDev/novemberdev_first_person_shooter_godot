@@ -1,20 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/MOB.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=2]
 params_diffuse_mode = 1
 params_specular_mode = 2
 roughness = 0.0
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=3]
 extents = Vector3( 1, 20.5782, 1 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=4]
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=5]
 
 [sub_resource type="ProceduralSky" id=6]
 
@@ -55,7 +56,7 @@ script = ExtResource( 1 )
 transform = Transform( 25, 0, 0, 0, 0.1, 0, 0, 0, 25, 0, 0, 0 )
 use_in_baked_light = true
 mesh = SubResource( 1 )
-material/0 = SubResource( 5 )
+material/0 = SubResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance" groups=[
 "floor",
@@ -63,10 +64,10 @@ material/0 = SubResource( 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.9958, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( 25, 0, 0, 0, 0.1, 0, 0, 0, 25, 0, 0, -95.8398 )
+transform = Transform( 16.993, 0, 0, 0, 0.1, 0, 0, 0, 27.425, 133.641, -1.88211, -102.507 )
 cast_shadow = 2
 use_in_baked_light = true
 mesh = SubResource( 1 )
@@ -79,15 +80,47 @@ collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.9958, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance17" type="MeshInstance" parent="."]
+transform = Transform( 29.5681, 0, 3.70107, 0, 0.1, 0, -2.8174, 0, 38.8421, 160.954, -2.64278, -222.967 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance17" groups=[
+"floor",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance17/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.9958, 0 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance21" type="MeshInstance" parent="."]
+transform = Transform( 26.2195, 0, 18.3323, 0, 0.1, 0, -13.9552, 0, 34.4432, 81.7249, -65.4445, -336.793 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance21" groups=[
+"floor",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance21/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, -2.98023e-08, 0, 1, 0, -16.9958, 0 )
+shape = SubResource( 3 )
 
 [node name="PLAYER" type="Spatial" parent="."]
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 15, 0, 0, 0, 30, -10.7488, 12.8786, -48.533 )
+transform = Transform( 1, 0, 0, 0, 15, 0, 0, 0, 14.104, -10.749, 12.879, -30.6369 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance2" groups=[
@@ -96,13 +129,136 @@ material/0 = null
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 15, 0, 0, 0, 14.104, 11.8809, 12.879, -30.6369 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance3" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="."]
+transform = Transform( 0.381603, 0, -25.4365, 0, 15, 0, 0.924326, 0, 10.5013, 10.8448, 12.8786, -66.8312 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance11" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance11/StaticBody"]
+transform = Transform( 1, 0, -9.53674e-07, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="."]
+transform = Transform( 0.326624, 0, -16.2024, 0, 15, 0, 0.945154, 0, 5.59917, 44.9713, 12.8786, -61.8826 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance12" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance12/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance14" type="MeshInstance" parent="."]
+transform = Transform( 0.93558, 0, -14.1246, 0, 15, 0, 0.353116, 0, 37.4232, 163.801, 12.9813, -166.675 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance14" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance14/StaticBody"]
+transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
+
+[node name="MeshInstance16" type="MeshInstance" parent="."]
+transform = Transform( 0.997486, 0, 4.25224, 0, 15, 0, -0.0708707, 0, 59.8491, 121.712, 12.9813, -186.068 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance16" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance16/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance18" type="MeshInstance" parent="."]
+transform = Transform( 0.971973, 0, 6.77556, 0, 15, 0, -0.235091, 0, 28.0132, 129.999, 6.69451, -271.797 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance18" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance18/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="."]
+transform = Transform( -0.127411, 0, -17.0029, 0, 15, 0, 0.99185, 0, -2.18415, 69.5156, 11.9605, -84.7533 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance13" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance13/StaticBody"]
+shape = SubResource( 5 )
+
+[node name="MeshInstance15" type="MeshInstance" parent="."]
+transform = Transform( 0.459595, 0, -19.5122, 0, 15, 0, 0.888128, 0, 10.0973, 99.7683, 10.6268, -67.9312 )
+cast_shadow = 2
+use_in_baked_light = true
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="MeshInstance15" groups=[
+"wall",
+]]
+collision_layer = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="MeshInstance15/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 9.31323e-10, 0, 1, 0, 0, 0 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance9" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 15, 0, 0, 0, 30, -10.7488, 12.8786, 48.6569 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance9" groups=[
@@ -112,28 +268,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03077, 0, 0 )
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance9/StaticBody"]
-shape = SubResource( 4 )
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( -1, 0, -9.77524e-06, 0, 15, 0, 3.25841e-07, 0, -30, 12.7303, 12.8786, -48.533 )
-cast_shadow = 2
-use_in_baked_light = true
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="MeshInstance3" groups=[
-"wall",
-]]
-collision_layer = 2
-
-[node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance10" type="MeshInstance" parent="."]
 transform = Transform( -1, 0, -9.77524e-06, 0, 15, 0, 3.25841e-07, 0, -30, 12.7303, 12.8786, 48.6569 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance10" groups=[
@@ -143,13 +284,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03077, 0, 0 )
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance10/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance5" type="MeshInstance" parent="."]
 transform = Transform( 2.98023e-08, 0, 30, 0, 15, 0, -1, 0, 9.53674e-07, -45.683, 12.8786, 12.7943 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance5" groups=[
@@ -159,13 +300,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03077, 0, 0 )
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance5/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance6" type="MeshInstance" parent="."]
 transform = Transform( 2.98023e-08, 0, 30, 0, 15, 0, -1, 0, 9.53674e-07, -45.683, 12.8786, -10.9941 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance6" groups=[
@@ -175,13 +316,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.959858, 0, 0 )
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance6/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance7" type="MeshInstance" parent="."]
 transform = Transform( 2.98023e-08, 0, 30, 0, 15, 0, -1, 0, 9.53674e-07, 46.1483, 12.8786, 12.7943 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance7" groups=[
@@ -190,13 +331,13 @@ material/0 = null
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance7/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="MeshInstance8" type="MeshInstance" parent="."]
 transform = Transform( 2.98023e-08, 0, 30, 0, 15, 0, -1, 0, 9.53674e-07, 46.1483, 12.8786, -10.9941 )
 cast_shadow = 2
 use_in_baked_light = true
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance8" groups=[
@@ -205,7 +346,7 @@ material/0 = null
 collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance8/StaticBody"]
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 46.0041, 0 )
@@ -216,5 +357,44 @@ omni_range = 306.0
 omni_attenuation = 2.92817
 omni_shadow_mode = 0
 
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.231, 46.0041, -80.5585 )
+light_energy = 2.2
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 306.0
+omni_attenuation = 2.92817
+omni_shadow_mode = 0
+
+[node name="OmniLight3" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.003, 40.2177, -193.519 )
+light_energy = 2.2
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 306.0
+omni_attenuation = 2.92817
+omni_shadow_mode = 0
+
+[node name="OmniLight4" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8661, 14.114, -308.448 )
+light_energy = 2.2
+light_bake_mode = 2
+shadow_enabled = true
+omni_range = 306.0
+omni_attenuation = 2.92817
+omni_shadow_mode = 0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 7 )
+
+[node name="MOB" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 154.088, -1.96613, -229.388 )
+
+[node name="MOB2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.6441, -65.1854, -312.023 )
+
+[node name="MOB3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 85.0223, -65.1854, -364.705 )
+
+[node name="MOB4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 53.0069, -65.1854, -351.9 )

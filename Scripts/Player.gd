@@ -39,6 +39,7 @@ var direction : Vector3 = Vector3.ZERO
 var bullet_scene = load("res://Scenes/BULLET.tscn")
 
 func _ready():
+	Globals.current_player = self
 	mode = MODE_CHARACTER
 	pitch = rotation_degrees.x
 	yaw = $Camera.rotation_degrees.y
@@ -92,7 +93,7 @@ func _process(delta):
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/shoot/active", true)
 		get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/AnimationPlayer").play("gun_shooting")
 		var new_bullet = bullet_scene.instance()
-		new_bullet.direction = (get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin - $Camera.global_transform.basis.z * 500.0).normalized()
+		new_bullet.direction = ((($Camera.global_transform.basis.z + $Camera.project_ray_origin(get_viewport().size / 2)+ $Camera.project_ray_normal(get_viewport().size / 2) * 1000.0)) - get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin).normalized() * 0.6
 		get_node("/root").add_child(new_bullet)
 		new_bullet.global_transform.origin = get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin
 		can_reload = false
@@ -105,8 +106,10 @@ func _process(delta):
 		get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/AnimationPlayer").play("gun_reloading")
 	
 	if Input.is_key_pressed(KEY_SHIFT) and !is_on_floor and !is_wallrunning:
+		Engine.time_scale = 0.25
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegTree.set("parameters/leg_state/current", 2)
 	else:
+		Engine.time_scale = 1.0
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegTree.set("parameters/leg_state/current", 0)
 	
 	direction += wallrun_exit_direction
@@ -187,6 +190,8 @@ func on_collision(body):
 	if body.is_in_group("floor"):
 		is_jumping = false
 		is_on_floor = true
+	if body.is_in_group("enemy"):
+		body.kill_kick()
 		
 func on_collision_exit(body):
 	if body.is_in_group("floor"):

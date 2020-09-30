@@ -15,6 +15,8 @@ extents = Vector3( 0.0870499, 0.08695, 0.333959 )
 mode = 2
 mass = 0.00102041
 gravity_scale = 0.0
+contacts_reported = 3
+contact_monitor = true
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]

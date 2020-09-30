@@ -19,6 +19,10 @@ config/name="TUT_3"
 run/main_scene="res://Scenes/LEVEL_0.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://Autoloads/Globals.gd"
+
 [input]
 
 reload={
