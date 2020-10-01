@@ -45,7 +45,6 @@ var initial_leg_transform
 
 func _ready():
 	Globals.current_player = self
-	mode = MODE_CHARACTER
 	pitch = rotation_degrees.x
 	yaw = $Camera.rotation_degrees.y
 	jump_curve = $JUMP_CURVE.texture.curve
@@ -114,7 +113,6 @@ func _process(delta):
 	
 	if Input.is_key_pressed(KEY_SHIFT) and !is_wallrunning and !$Raycasts/GROUND.is_colliding():
 		Engine.time_scale = 0.2
-		#direction -= $Camera.global_transform.basis.z * 2.0
 		direction *= 2.4
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin - direction * Vector3(1, 0, 0.3), delta * 3.0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
@@ -167,13 +165,10 @@ func _process(delta):
 		if Input.is_action_just_pressed("ui_select"):
 			if is_wallrunning:
 				wallrun_exit_direction = -$Camera.global_transform.basis.z * WALLRUN_JUMP_STRENGTH
-				print("wallrun")
 			is_wallrunning = false
 			is_jumping = true
-			print("jump")
 
 		if is_jumping:
-			print("is jumping")
 			linear_velocity.y = jump_curve.interpolate(jump_time/MAX_JUMP_TIME) * MAX_JUMP
 
 	if !Input.is_action_pressed("ui_select"):
@@ -182,17 +177,14 @@ func _process(delta):
 
 	if is_on_floor and !is_jumping:
 		jump_time = 0.0
-		print("time zero 0")
 		linear_velocity.y = 0.0
 	elif is_on_floor and is_jumping:
 		jump_time = 0.0
-		print("time zero 1")
 	elif !is_wallrunning:
 		jump_time += delta
 		linear_velocity.y -= GRAVITY * delta
 	elif is_wallrunning:
 		jump_time = 0
-		print("time zero 2")
 		is_jumping = false
 		linear_velocity.y = 0
 
@@ -224,17 +216,14 @@ func _process(delta):
 		
 func on_collision(body):
 	if body.is_in_group("floor"):
-		print("on floor")
 		is_jumping = false
 		is_on_floor = true
 	if body.is_in_group("enemy"):
 		body.kill_kick()
-		print("on enemy")
 		
 func on_collision_exit(body):
 	if body.is_in_group("floor"):
 		is_on_floor = false
-		print("not on floor")
 
 func show_muzzle():
 	$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".visible = true
