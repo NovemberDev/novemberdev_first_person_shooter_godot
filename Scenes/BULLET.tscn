@@ -4,14 +4,15 @@
 [ext_resource path="res://Assets/Models/bullet.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://Scripts/Bullet.gd" type="Script" id=3]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 flags_unshaded = true
 albedo_texture = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.0870499, 0.08695, 0.333959 )
 
 [node name="BULLET" type="RigidBody"]
+collision_mask = 3
 mode = 2
 mass = 0.00102041
 gravity_scale = 0.0
@@ -22,7 +23,12 @@ script = ExtResource( 3 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 cast_shadow = 0
 mesh = ExtResource( 2 )
-material/0 = SubResource( 2 )
+material/0 = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 3

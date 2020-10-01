@@ -30,5 +30,6 @@ func take_damage():
 
 func kill_kick():
 	$AnimationTree.set("parameters/state/current", 1)
+	Globals.current_player.leg_hit()
 	$CollisionShape.disabled = true
 	can_shoot = false
