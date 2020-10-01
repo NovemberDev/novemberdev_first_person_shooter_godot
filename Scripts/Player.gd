@@ -12,7 +12,7 @@ const MAX_DEACCELERATION_TIME = 0.5
 const MAX_WALLRUN_TIMEOUT = 1.0
 const MOUSE_SENSITIVITY = 0.3
 const WALLRUN_JUMP_STRENGTH = 5.0
-const ARM_ROTATION_SPEED = 25.0
+const ARM_ROTATION_SPEED = 30.0
 
 # horizontal rotation (y)
 var yaw = 0
@@ -141,8 +141,8 @@ func _process(delta):
 	$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, initial_leg_transform, delta * 8.0)
 	
 	if linear_velocity.length() > 10.0 and (is_wallrunning or is_on_floor):
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.15 * sin(((0.005 * int(is_wallrunning)) + 0.008) * OS.get_ticks_msec()), delta * 5.0)
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.15 * sin(((0.005 * int(is_wallrunning) + 0.008)) * OS.get_ticks_msec()), delta * 5.0)
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.1 * sin(((0.005 * int(is_wallrunning)) + 0.008) * OS.get_ticks_msec()), delta * 5.0)
+		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.1 * sin(((0.005 * int(is_wallrunning) + 0.008)) * OS.get_ticks_msec()), delta * 5.0)
 	else:
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.x, 0.0, delta * 5.0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/arms.transform.origin.z, 0.0, delta * 5.0)
