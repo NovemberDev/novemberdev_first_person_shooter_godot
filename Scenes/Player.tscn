@@ -86,7 +86,7 @@ nodes/shoot/node = SubResource( 14 )
 nodes/shoot/position = Vector2( 360, 240 )
 nodes/shoot_l_state/node = SubResource( 15 )
 nodes/shoot_l_state/position = Vector2( -140, 360 )
-node_connections = [ "reload", 0, "shoot", "reload", 1, "Add2 3", "output", 0, "reload", "Add2", 0, "base_l_state", "Add2", 1, "Animation 2", "Add2 3", 0, "Animation 9", "Add2 3", 1, "Animation 10", "base_l_state", 0, "Animation 6", "base_l_state", 1, "Animation", "shoot_l_state", 0, "Animation 4", "shoot_l_state", 1, "Animation 3", "shoot", 0, "Add2", "shoot", 1, "shoot_l_state" ]
+node_connections = [ "reload", 0, "shoot", "reload", 1, "Add2 3", "output", 0, "reload", "shoot", 0, "Add2", "shoot", 1, "shoot_l_state", "Add2", 0, "base_l_state", "Add2", 1, "Animation 2", "base_l_state", 0, "Animation 6", "base_l_state", 1, "Animation", "Add2 3", 0, "Animation 9", "Add2 3", 1, "Animation 10", "shoot_l_state", 0, "Animation 4", "shoot_l_state", 1, "Animation 3" ]
 
 [sub_resource type="AnimationNodeAnimation" id=17]
 animation = "sliding"
@@ -2041,10 +2041,15 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 3.03197, 0.0, 0, 0 ]
 [sub_resource type="CurveTexture" id=73]
 curve = SubResource( 72 )
 
-[node name="Player" type="RigidBody"]
+[node name="Player" type="RigidBody" groups=[
+"player",
+]]
 mode = 2
 contacts_reported = 5
 contact_monitor = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource( 1 )
 
 [node name="CollisionShapeStanding" type="CollisionShape" parent="."]
@@ -2074,6 +2079,7 @@ collision_mask = 2
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77475, 0 )
 enabled = true
 cast_to = Vector3( 0, -1.9, 0 )
+collision_mask = 3
 
 [node name="Muzzle" type="OmniLight" parent="."]
 transform = Transform( -0.971632, -0.188151, -0.143282, -0.185527, 0.982132, -0.0315813, -0.146664, 0.00410279, 0.989178, 0.577659, -0.228225, -2.5249 )

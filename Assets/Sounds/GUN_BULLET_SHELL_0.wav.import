@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GUN_BULLET_SHELL_0.wav-5fa157e1ded6e2f0eb2c3eafdc222926.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/GUN_BULLET_SHELL_0.wav"
+dest_files=[ "res://.import/GUN_BULLET_SHELL_0.wav-5fa157e1ded6e2f0eb2c3eafdc222926.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

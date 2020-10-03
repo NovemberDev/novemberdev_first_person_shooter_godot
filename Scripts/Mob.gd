@@ -5,6 +5,9 @@ var can_shoot = true
 var shoot_timeout = 0.0
 var bullet_scene = load("res://Scenes/MOB_BULLET.tscn")
 
+func _ready():
+	$AnimationTree.active = true
+
 func _process(delta):
 	if !can_shoot: return
 	look_at(Globals.current_player.global_transform.origin, Vector3.UP)

@@ -104,6 +104,7 @@ func _process(delta):
 		new_bullet.global_transform.origin = get_node("Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT").global_transform.origin
 		can_reload = false
 		can_shoot = false
+		
 	if Input.is_action_just_pressed("reload") and can_reload:
 		can_shoot = false
 		can_reload = false
@@ -118,12 +119,13 @@ func _process(delta):
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegRTree.set("parameters/leg_state/current", 2)
 	elif Input.is_key_pressed(KEY_SHIFT) and !is_wallrunning and $Raycasts/GROUND.is_colliding():
+		Engine.time_scale = 1.0
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin - direction * Vector3(0.5, 0, 0.3), delta * 3.0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegRTree.set("parameters/leg_state/current", 2)
 		$CollisionShapeStanding.disabled = true
 		$CollisionShapeSliding.disabled = false
-		direction -= $Camera.global_transform.basis.z
+		direction -= $Camera.global_transform.basis.z * 0.3
 		$Camera.transform.origin.y = 0.5
 	else:
 		Engine.time_scale = 1.0
@@ -226,6 +228,7 @@ func on_collision_exit(body):
 		is_on_floor = false
 
 func show_muzzle():
+	Globals.play_sound("SHOOT.wav", -10)
 	$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".visible = true
 	$"Camera/ViewportContainer/Viewport/PLAYER_RIG/arms/Armature001/Skeleton 2/BoneAttachment/gunbody/BULLET_SLOT/Sprite3D".rotation_degrees.z = randf()*360.0+0.0
 
@@ -240,5 +243,9 @@ func leg_hit():
 	$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg/leg_l/HIT/AnimationPlayer.play("hit")
 
 func show_hitmarker():
+	Globals.play_sound("hitmarker.wav", 0)
 	$Hitmarker.visible = true
 	hitmarker_timeout = 0.15
+
+func take_damage():
+	print("took damage")

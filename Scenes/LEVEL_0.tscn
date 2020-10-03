@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/MOB.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -80,6 +80,10 @@ adjustment_saturation = 1.1
 [sub_resource type="CubeMesh" id=12]
 
 [sub_resource type="BoxShape" id=13]
+
+[sub_resource type="CubeMesh" id=14]
+
+[sub_resource type="BoxShape" id=15]
 
 [node name="LEVEL_0" type="Spatial"]
 script = ExtResource( 1 )
@@ -479,18 +483,6 @@ collision_layer = 2
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance20/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="MOB" parent="Mid" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134.503, -23.8769, -257.456 )
-collision_layer = 2
-
-[node name="MOB2" parent="Mid" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 147.085, -23.8769, -278.394 )
-collision_layer = 2
-
-[node name="MOB3" parent="Mid" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.915, -23.8769, -278.394 )
-collision_layer = 2
-
 [node name="MeshInstance4" type="MeshInstance" parent="."]
 transform = Transform( 18.6115, 0, 0, 0, 18.1566, 0, 0, 0, 18.9956, 137.904, -41.8306, -248.89 )
 mesh = SubResource( 12 )
@@ -503,3 +495,50 @@ collision_layer = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
 shape = SubResource( 13 )
+
+[node name="StaticBody2" type="StaticBody" parent="." groups=[
+"grapple",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.5769, 25.2817 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+mesh = SubResource( 14 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 15 )
+
+[node name="Enemy_Group_1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 134.561, -24.622, -247.741 )
+
+[node name="MOB" parent="Enemy_Group_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.25533, 3.36701, -12.4333 )
+
+[node name="MOB2" parent="Enemy_Group_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1274, 3.36701, -9.18596 )
+
+[node name="MOB3" parent="Enemy_Group_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36701, 5.92497 )
+
+[node name="PATROLLING_WAYPOINTS" type="Spatial" parent="Enemy_Group_1"]
+
+[node name="Spatial" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.32063, 0, 0 )
+
+[node name="Spatial2" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8788, 0, -7.44463 )
+
+[node name="Spatial3" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.8788, 0, 3.8622 )
+
+[node name="Spatial4" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4879, 0, 9.24234 )
+
+[node name="Spatial5" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.716, 0, 15.3597 )
+
+[node name="Spatial6" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14845, 0, -14.4504 )
+
+[node name="Spatial7" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66919, 0, -14.4504 )
