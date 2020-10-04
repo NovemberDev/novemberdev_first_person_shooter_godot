@@ -633,7 +633,7 @@ nodes/shoot/node = SubResource( 18 )
 nodes/shoot/position = Vector2( 140, -60 )
 nodes/state/node = SubResource( 19 )
 nodes/state/position = Vector2( 340, -60 )
-node_connections = [ "output", 0, "state", "state", 0, "shoot", "state", 1, "Animation 3", "run", 0, "Animation 2", "run", 1, "Animation", "shoot", 0, "run", "shoot", 1, "Animation 4" ]
+node_connections = [ "output", 0, "state", "state", 0, "shoot", "state", 1, "Animation 3", "shoot", 0, "run", "shoot", 1, "Animation 4", "run", 0, "Animation 2", "run", 1, "Animation" ]
 
 [node name="MOB" type="RigidBody" groups=[
 "enemy",
@@ -719,7 +719,7 @@ bones/12/enabled = true
 bones/12/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="mob/Armature/Skeleton"]
-transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.72894, 1.75568 )
+transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.56535, 1.75568 )
 bone_name = "bone_3"
 
 [node name="BULLET_SLOT" type="Spatial" parent="mob/Armature/Skeleton/BoneAttachment"]

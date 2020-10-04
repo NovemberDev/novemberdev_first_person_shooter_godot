@@ -6,11 +6,11 @@
 [ext_resource path="res://Assets/Models/Material_002.material" type="Material" id=4]
 [ext_resource path="res://Assets/Models/Material_003.material" type="Material" id=5]
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=1]
 radius = 1.23949
 height = 2.40312
 
-[sub_resource type="ArrayMesh" id=4]
+[sub_resource type="ArrayMesh" id=2]
 resource_name = "Cube"
 surfaces/0 = {
 "aabb": AABB( -3.04146, -5.70604, -1.60286, 6.08292, 11.4467, 3.71726 ),
@@ -61,7 +61,7 @@ surfaces/3 = {
 "vertex_count": 260
 }
 
-[sub_resource type="Skin" id=5]
+[sub_resource type="Skin" id=3]
 resource_name = "Skin"
 bind_count = 13
 bind/0/name = "bone"
@@ -104,19 +104,19 @@ bind/12/name = "bone_12"
 bind/12/bone = -1
 bind/12/pose = Transform( 0.00565608, 0.299535, -0.954069, 0.0139273, -0.954015, -0.299435, -0.999887, -0.0115939, -0.00956764, 1.68161, -3.04466, 0.996061 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 1, 0.890196, 0, 1 )
 
-[sub_resource type="SpatialMaterial" id=8]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0, 1, 0.576471, 1 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 1, 0, 0.376471, 1 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 length = 0.001
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:bone_3")
@@ -210,7 +210,7 @@ tracks/12/imported = true
 tracks/12/enabled = true
 tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 length = 0.001
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:bone_3")
@@ -304,7 +304,7 @@ tracks/12/imported = true
 tracks/12/enabled = true
 tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=10]
 length = 0.001
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:bone_3")
@@ -398,7 +398,7 @@ tracks/12/imported = true
 tracks/12/enabled = true
 tracks/12/keys = PoolRealArray( 0, 1, -1.73524, 3.38948, 2.40333, -0.0924183, -0.439839, 0.553589, 0.701099, 1, 1, 1 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=11]
 length = 0.833333
 loop = true
 tracks/0/type = "transform"
@@ -493,7 +493,7 @@ tracks/12/imported = true
 tracks/12/enabled = true
 tracks/12/keys = PoolRealArray( 0, 1, -0.407809, 0.796579, 0.564818, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.0666667, 1, -0.287532, 0.561641, 0.398235, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.133333, 1, -0.0759068, 0.14827, 0.105132, -2.30968e-07, 1.49012e-07, -1.86264e-07, 1, 1, 1, 1, 0.2, 1, 0.0580719, -0.113433, -0.0804302, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.266667, 1, 0.021931, -0.0428382, -0.0303746, -2.08616e-07, 4.47035e-08, -2.45869e-07, 1, 1, 1, 1, 0.333333, 1, -0.078843, 0.154005, 0.109198, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.4, 1, -0.149167, 0.291371, 0.206598, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.466667, 1, -0.123865, 0.241948, 0.171554, -2.01166e-07, 4.47035e-08, -2.38419e-07, 1, 1, 1, 1, 0.533333, 1, -0.0254714, 0.0497537, 0.0352781, -2.01166e-07, 4.47035e-08, -2.38419e-07, 1, 1, 1, 1, 0.6, 1, 0.0533882, -0.104284, -0.0739431, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.666667, 1, 0.0180644, -0.0352854, -0.0250193, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.8, 1, -0.368263, 0.719334, 0.510048, -2.12342e-07, 1.04308e-07, -2.30968e-07, 1, 1, 1, 1, 0.833333, 1, -0.407809, 0.796579, 0.564818, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=12]
 length = 0.583333
 tracks/0/type = "transform"
 tracks/0/path = NodePath("Armature/Skeleton:bone_3")
@@ -587,51 +587,51 @@ tracks/12/imported = true
 tracks/12/enabled = true
 tracks/12/keys = PoolRealArray( 0, 1, 0, 0, 0, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1, 0.583333, 1, 0, 0, 0, -2.04891e-07, 1.04308e-07, -2.16067e-07, 1, 1, 1, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "aim"
 
-[sub_resource type="AnimationNodeAnimation" id=16]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "dead"
 
-[sub_resource type="AnimationNodeAnimation" id=17]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "shoot"
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=16]
 animation = "run"
 
-[sub_resource type="AnimationNodeAdd2" id=19]
+[sub_resource type="AnimationNodeAdd2" id=17]
 filter_enabled = true
 filters = [ "Armature/Skeleton:bone", "Armature/Skeleton:bone_10", "Armature/Skeleton:bone_11", "Armature/Skeleton:bone_12", "Armature/Skeleton:bone_4", "Armature/Skeleton:bone_5", "Armature/Skeleton:bone_6" ]
 
-[sub_resource type="AnimationNodeOneShot" id=20]
+[sub_resource type="AnimationNodeOneShot" id=18]
 filter_enabled = true
 filters = [ "Armature/Skeleton:bone", "Armature/Skeleton:bone_1", "Armature/Skeleton:bone_2", "Armature/Skeleton:bone_3", "Armature/Skeleton:bone_7", "Armature/Skeleton:bone_8", "Armature/Skeleton:bone_9" ]
 
-[sub_resource type="AnimationNodeTransition" id=21]
+[sub_resource type="AnimationNodeTransition" id=19]
 input_count = 2
 input_0/name = "aim"
 input_0/auto_advance = false
 input_1/name = "dead"
 input_1/auto_advance = false
 
-[sub_resource type="AnimationNodeBlendTree" id=22]
+[sub_resource type="AnimationNodeBlendTree" id=20]
 graph_offset = Vector2( -260, -39 )
-nodes/Animation/node = SubResource( 18 )
+nodes/Animation/node = SubResource( 16 )
 nodes/Animation/position = Vector2( -320, 100 )
-"nodes/Animation 2/node" = SubResource( 15 )
+"nodes/Animation 2/node" = SubResource( 13 )
 "nodes/Animation 2/position" = Vector2( -260, -60 )
-"nodes/Animation 3/node" = SubResource( 16 )
+"nodes/Animation 3/node" = SubResource( 14 )
 "nodes/Animation 3/position" = Vector2( 140, 140 )
-"nodes/Animation 4/node" = SubResource( 17 )
+"nodes/Animation 4/node" = SubResource( 15 )
 "nodes/Animation 4/position" = Vector2( -100, 140 )
 nodes/output/position = Vector2( 500, -60 )
-nodes/run/node = SubResource( 19 )
+nodes/run/node = SubResource( 17 )
 nodes/run/position = Vector2( -60, -60 )
-nodes/shoot/node = SubResource( 20 )
+nodes/shoot/node = SubResource( 18 )
 nodes/shoot/position = Vector2( 140, -60 )
-nodes/state/node = SubResource( 21 )
+nodes/state/node = SubResource( 19 )
 nodes/state/position = Vector2( 340, -60 )
-node_connections = [ "output", 0, "state", "state", 0, "shoot", "state", 1, "Animation 3", "run", 0, "Animation 2", "run", 1, "Animation", "shoot", 0, "run", "shoot", 1, "Animation 4" ]
+node_connections = [ "output", 0, "state", "state", 0, "shoot", "state", 1, "Animation 3", "shoot", 0, "run", "shoot", 1, "Animation 4", "run", 0, "Animation 2", "run", 1, "Animation" ]
 
 [node name="MOB" type="RigidBody" groups=[
 "enemy",
@@ -642,7 +642,7 @@ script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="mob" type="Spatial" parent="."]
 transform = Transform( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0 )
@@ -717,29 +717,29 @@ bones/12/enabled = true
 bones/12/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="mob/Armature/Skeleton"]
-transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.70044, 1.75568 )
+transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.68715, 1.75568 )
 bone_name = "bone_3"
 
 [node name="BULLET_SLOT" type="Spatial" parent="mob/Armature/Skeleton/BoneAttachment"]
 transform = Transform( 1, 8.56817e-08, 1.49012e-08, 7.07805e-08, 1, 8.9407e-08, -2.6077e-08, -8.9407e-08, 1, -0.0126332, 7.12536, -0.742789 )
 
 [node name="Cube" type="MeshInstance" parent="mob/Armature/Skeleton"]
-mesh = SubResource( 4 )
-skin = SubResource( 5 )
-material/0 = SubResource( 6 )
-material/1 = SubResource( 7 )
-material/2 = SubResource( 8 )
-material/3 = SubResource( 9 )
+mesh = SubResource( 2 )
+skin = SubResource( 3 )
+material/0 = SubResource( 4 )
+material/1 = SubResource( 5 )
+material/2 = SubResource( 6 )
+material/3 = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="mob"]
-anims/aim = SubResource( 10 )
-anims/base = SubResource( 11 )
-anims/dead = SubResource( 12 )
-anims/run = SubResource( 13 )
-anims/shoot = SubResource( 14 )
+anims/aim = SubResource( 8 )
+anims/base = SubResource( 9 )
+anims/dead = SubResource( 10 )
+anims/run = SubResource( 11 )
+anims/shoot = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 22 )
+tree_root = SubResource( 20 )
 anim_player = NodePath("../mob/AnimationPlayer")
 active = true
 parameters/run/add_amount = 1.0
