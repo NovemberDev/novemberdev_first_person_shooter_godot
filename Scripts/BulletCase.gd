@@ -9,7 +9,6 @@ func _ready():
 	linear_velocity = direction * 10.0 + Vector3.UP * 2.0 - look_at * 20.0
 	look_at(-look_at, Vector3.UP)
 
-
 func _process(delta):
 	linear_velocity.y -= 50.0 * delta
 	timeout -= delta

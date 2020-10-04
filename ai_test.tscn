@@ -20,6 +20,141 @@ shape = SubResource( 2 )
 
 [node name="MOB" parent="." instance=ExtResource( 1 )]
 
+[node name="MOB2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.16831, 3.36701, 0 )
+
+[node name="MOB3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3961, 3.36701, 0 )
+
+[node name="MOB4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31304, 3.36701, -6.3365 )
+
+[node name="MOB5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.31304, 3.36701, 4.63933 )
+
+[node name="MOB6" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435102, 3.36701, 4.63933 )
+
+[node name="MOB7" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435102, 3.36701, 8.50428 )
+
+[node name="MOB8" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435102, 3.36701, 8.50428 )
+
+[node name="MOB9" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97046, 3.36701, 0 )
+
+[node name="MOB10" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.1388, 3.36701, 0 )
+
+[node name="MOB11" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42565, 3.36701, 0 )
+
+[node name="MOB12" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34258, 3.36701, -6.3365 )
+
+[node name="MOB13" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34258, 3.36701, 4.63933 )
+
+[node name="MOB14" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53535, 3.36701, 4.63933 )
+
+[node name="MOB15" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53535, 3.36701, 8.50428 )
+
+[node name="MOB16" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.53535, 3.36701, 8.50428 )
+
+[node name="MOB17" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28095, 3.36701, 8.50428 )
+
+[node name="MOB18" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28095, 3.36701, 8.50428 )
+
+[node name="MOB19" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.87539, 3.36701, 0 )
+
+[node name="MOB20" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.29292, 3.36701, 0 )
+
+[node name="MOB21" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2715, 3.36701, 0 )
+
+[node name="MOB22" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1884, 3.36701, -6.3365 )
+
+[node name="MOB23" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1884, 3.36701, 4.63933 )
+
+[node name="MOB24" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3105, 3.36701, 4.63933 )
+
+[node name="MOB25" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3105, 3.36701, 8.50428 )
+
+[node name="MOB26" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3105, 3.36701, 8.50428 )
+
+[node name="MOB27" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66075, 3.36701, 3.97994 )
+
+[node name="MOB28" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66075, 3.36701, 3.97994 )
+
+[node name="MOB29" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06631, 3.36701, -4.52434 )
+
+[node name="MOB30" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2346, 3.36701, -4.52434 )
+
+[node name="MOB31" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3298, 3.36701, -4.52434 )
+
+[node name="MOB32" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246729, 3.36701, -10.8608 )
+
+[node name="MOB33" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246729, 3.36701, 0.114982 )
+
+[node name="MOB34" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6312, 3.36701, 0.114982 )
+
+[node name="MOB35" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6312, 3.36701, 3.97994 )
+
+[node name="MOB36" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6312, 3.36701, 3.97994 )
+
+[node name="MOB37" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54135, 3.36701, 11.2759 )
+
+[node name="MOB38" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.54135, 3.36701, 11.2759 )
+
+[node name="MOB39" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9469, 3.36701, 2.77158 )
+
+[node name="MOB40" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.1152, 3.36701, 2.77158 )
+
+[node name="MOB41" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4492, 3.36701, 2.77158 )
+
+[node name="MOB42" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.63388, 3.36701, -3.56492 )
+
+[node name="MOB43" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.63388, 3.36701, 7.4109 )
+
+[node name="MOB44" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5118, 3.36701, 7.4109 )
+
+[node name="MOB45" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5118, 3.36701, 11.2759 )
+
+[node name="MOB46" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5118, 3.36701, 11.2759 )
+
 [node name="PATROLLING_WAYPOINTS" type="Spatial" parent="."]
 
 [node name="Spatial" type="Spatial" parent="PATROLLING_WAYPOINTS"]

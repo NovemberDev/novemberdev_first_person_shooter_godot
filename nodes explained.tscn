@@ -1,0 +1,59 @@
+[gd_scene format=2]
+
+[node name="Spatial - Your container and transformation in 3D" type="Spatial"]
+
+[node name="Transformation is Position (origin), Rotation (Radians or degrees), Scale" type="Spatial" parent="."]
+
+[node name="--------------------" type="Spatial" parent="."]
+
+[node name="MeshInstance - Can display any 3D model you create in blender" type="MeshInstance" parent="."]
+
+[node name="---------------------" type="Spatial" parent="."]
+
+[node name="RigidBody - behaves physically correct like any object in motion" type="RigidBody" parent="."]
+
+[node name="StaticBody - never moves and should never move, objects collide with it" type="StaticBody" parent="."]
+
+[node name="KinematicBody - like rigidbody, but tailored to movement" type="KinematicBody" parent="."]
+
+[node name="----------------------" type="Spatial" parent="."]
+
+[node name="Area - allows you to detect bodies from entering and leaving it" type="Area" parent="."]
+
+[node name="CollisionShape - Needed by every ^^^^ physics body" type="CollisionShape" parent="Area - allows you to detect bodies from entering and leaving it"]
+
+[node name="CollisionShape - has a shape, describes the boundaries (sphere, cube)" type="CollisionShape" parent="Area - allows you to detect bodies from entering and leaving it"]
+
+[node name="------------------------" type="Spatial" parent="."]
+
+[node name="RayCast - is a line and detects intersections with physicsbodies" type="RayCast" parent="."]
+
+[node name="-------------------------" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="."]
+
+[node name="ARVRCamera - Camera for Virtual Reality Games" type="ARVRCamera" parent="."]
+
+[node name="--------------------------" type="Spatial" parent="."]
+
+[node name="AudioStreamPlayer3D - For playing audio spatially" type="AudioStreamPlayer3D" parent="."]
+
+[node name="---------------------------" type="Spatial" parent="."]
+
+[node name="DirectionalLight - Light from a single direction (not any position)" type="DirectionalLight" parent="."]
+
+[node name="OmniLight - Light from a position in all of its directions" type="OmniLight" parent="."]
+
+[node name="SpotLight - Light in a direction from a position with cone boundaries" type="SpotLight" parent="."]
+
+[node name="----------------------------" type="Spatial" parent="."]
+
+[node name="BakedLightmap - Precompute shadows and how light acts in the world" type="BakedLightmap" parent="."]
+
+[node name="GIProbe - Precompute light that can bounce off objects realistically" type="GIProbe" parent="."]
+
+[node name="ReflectionProbe - Caputres everything around it to create reflections" type="ReflectionProbe" parent="."]
+
+[node name="-----------------------------" type="Spatial" parent="."]
+
+[node name="Particles - Allows you to spawn objects like leaves, fire sparkles and so on" type="Particles" parent="."]

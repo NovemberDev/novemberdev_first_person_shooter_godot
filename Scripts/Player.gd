@@ -1,23 +1,27 @@
 extends RigidBody
 
-const GRAVITY = 60.0
+const GRAVITY = 80.0
 const MAX_JUMP = 100.0
-const MAX_SPEED = 25.0
-const MAX_JUMP_TIME = 0.5
+const MAX_SPEED = 18.0
+const MAX_INAIR_SPEED = 22.0
+const MAX_WALLRUN_SPEED = 30.0
+const MAX_JUMP_TIME = 0.4
 const MAX_STRAFE_CAM_ANGLE = 3.0
 const MAX_STRAFE_CAM_SPEED = 5.0
-const MAX_ACCELERATION_TIME = 0.5
+const MAX_ACCELERATION_TIME = 0.6
 const WALLRUN_MAX_CAM_ANGLE = 30.0
 const MAX_DEACCELERATION_TIME = 0.5
 const MAX_WALLRUN_TIMEOUT = 1.0
 const MOUSE_SENSITIVITY = 0.3
-const WALLRUN_JUMP_STRENGTH = 5.0
+const WALLRUN_JUMP_STRENGTH = 300.0
 const ARM_ROTATION_SPEED = 30.0
 
 # horizontal rotation (y)
 var yaw = 0
 # vertical rotation (x)
 var pitch = 0
+
+var health = 100
 
 var jump_curve : Curve
 var acceleration_curve : Curve
@@ -42,6 +46,11 @@ var bullet_case_scene = load("res://Scenes/BULLET_CASE.tscn")
 var hitmarker_timeout = 0.0
 var initial_camera_height
 var initial_leg_transform
+var is_fast = false
+var previous_position
+
+var very_funny = rand_range(60, 180)
+var interaction_object = null
 
 func _ready():
 	Globals.current_player = self
@@ -56,13 +65,14 @@ func _ready():
 	$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.active = true
 	initial_camera_height = $Camera.transform.origin.y
 	initial_leg_transform = $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin
+	previous_position = global_transform.origin
 
 func _input(event):
 	# filter events for mouse movement
 	if event is InputEventMouseMotion:
 		# float modulus the angle difference, 
-		# so that 360%360==0 and 90%360==90
-		# to prevent angles above 360 degrees
+		# 360%360 = 0 and 90%360 = 90
+		# to prevent angles above 360 and below 0 degrees
 		yaw = fmod(yaw - event.relative.x * MOUSE_SENSITIVITY, 360)
 		# do the same, but clamp it at 70 and -70
 		pitch = max(min(pitch - event.relative.y * MOUSE_SENSITIVITY, 70), -70)
@@ -85,12 +95,12 @@ func _process(delta):
 	wallrun_exit_direction = lerp(wallrun_exit_direction, Vector3.ZERO, delta * 5.0)
 	
 	if Input.is_key_pressed(KEY_A):
-		# basis.x is the current left vector
+		# basis.x is the current "left" vector
 		direction -= $Camera.global_transform.basis.x
 	if Input.is_key_pressed(KEY_D):
 		direction += $Camera.global_transform.basis.x
 	if Input.is_key_pressed(KEY_W):
-		# basis.z is the current forward vector
+		# basis.z is the current "forward" vector
 		direction -= $Camera.global_transform.basis.z
 	if Input.is_key_pressed(KEY_S):
 		direction += $Camera.global_transform.basis.z
@@ -114,19 +124,19 @@ func _process(delta):
 	
 	if Input.is_key_pressed(KEY_SHIFT) and !is_wallrunning and !$Raycasts/GROUND.is_colliding():
 		Engine.time_scale = 0.2
-		direction *= 2.4
+		direction *= 800 * delta
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin - direction * Vector3(1, 0, 0.3), delta * 3.0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegRTree.set("parameters/leg_state/current", 2)
-	elif Input.is_key_pressed(KEY_SHIFT) and !is_wallrunning and $Raycasts/GROUND.is_colliding():
-		Engine.time_scale = 1.0
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin - direction * Vector3(0.5, 0, 0.3), delta * 3.0)
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
-		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegRTree.set("parameters/leg_state/current", 2)
-		$CollisionShapeStanding.disabled = true
-		$CollisionShapeSliding.disabled = false
-		direction -= $Camera.global_transform.basis.z * 0.3
-		$Camera.transform.origin.y = 0.5
+#	elif Input.is_key_pressed(KEY_SHIFT) and !is_wallrunning and $Raycasts/GROUND.is_colliding():
+#		Engine.time_scale = 1.0
+#		$Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin = lerp($Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin, $Camera/ViewportContainer/Viewport/PLAYER_RIG/leg.transform.origin - direction * Vector3(0.5, 0, 0.3), delta * 3.0)
+#		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegLTree.set("parameters/leg_state/current", 2)
+#		$Camera/ViewportContainer/Viewport/PLAYER_RIG/LegRTree.set("parameters/leg_state/current", 2)
+#		$CollisionShapeStanding.disabled = true
+#		$CollisionShapeSliding.disabled = false
+#		linear_velocity -= $Camera.global_transform.basis.z * 8.0
+#		$Camera.transform.origin.y = 0.5
 	else:
 		Engine.time_scale = 1.0
 		$Camera.transform.origin.y = initial_camera_height
@@ -151,7 +161,10 @@ func _process(delta):
 		deacceleration_time = 0
 		if acceleration_time < 1.0:
 			acceleration_time += delta
-		direction *= acceleration_curve.interpolate(acceleration_time/MAX_ACCELERATION_TIME) * MAX_SPEED
+		var speed = MAX_SPEED
+		if !is_on_floor:
+			speed = MAX_INAIR_SPEED
+		direction *= acceleration_curve.interpolate(acceleration_time/MAX_ACCELERATION_TIME) * speed
 		direction.y = linear_velocity.y
 		linear_velocity = direction
 	elif is_on_floor:
@@ -166,7 +179,7 @@ func _process(delta):
 	if jump_time <= MAX_JUMP_TIME:
 		if Input.is_action_just_pressed("ui_select"):
 			if is_wallrunning:
-				wallrun_exit_direction = -$Camera.global_transform.basis.z * WALLRUN_JUMP_STRENGTH
+				wallrun_exit_direction = -$Camera.global_transform.basis.z * WALLRUN_JUMP_STRENGTH * delta
 			is_wallrunning = false
 			is_jumping = true
 
@@ -176,7 +189,6 @@ func _process(delta):
 	if !Input.is_action_pressed("ui_select"):
 		jump_time = MAX_JUMP_TIME
 		is_jumping = false
-
 	if is_on_floor and !is_jumping:
 		jump_time = 0.0
 		linear_velocity.y = 0.0
@@ -190,17 +202,20 @@ func _process(delta):
 		is_jumping = false
 		linear_velocity.y = 0
 
-	if $Raycasts/RL.is_colliding():
+	var delta_pos = previous_position - global_transform.origin
+	is_fast = Vector2(direction.x, direction.z).length() >= 15.0 and Vector2(delta_pos.x, delta_pos.z).length() > 0.1
+	
+	if $Raycasts/RL.is_colliding() and is_fast:
 		is_wallrunning = true
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/base_l_state/current", 0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/shoot_l_state/add_amount", 0)
-		wallrun_direction = linear_velocity.normalized() * MAX_SPEED
+		wallrun_direction = linear_velocity.normalized() * MAX_WALLRUN_SPEED
 		wallrun_strafe = -WALLRUN_MAX_CAM_ANGLE
-	elif $Raycasts/RR.is_colliding():
+	elif $Raycasts/RR.is_colliding() and is_fast:
 		is_wallrunning = true
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/base_l_state/current", 0)
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/shoot_l_state/add_amount", 0)
-		wallrun_direction = linear_velocity.normalized() * MAX_SPEED
+		wallrun_direction = linear_velocity.normalized() * MAX_WALLRUN_SPEED
 		wallrun_strafe = WALLRUN_MAX_CAM_ANGLE
 	else:
 		$Camera/ViewportContainer/Viewport/PLAYER_RIG/ArmTree.set("parameters/base_l_state/current", 1)
@@ -208,13 +223,32 @@ func _process(delta):
 		is_wallrunning = false
 		wallrun_strafe = 0
 		
-	if Vector2(linear_velocity.x, linear_velocity.z).length() <= 15.0:
-		is_wallrunning = false
-		wallrun_strafe = 0
-		
 	if hitmarker_timeout <= 0.0:
 		$Hitmarker.visible = false
 	hitmarker_timeout -= delta
+	
+	if global_transform.origin.y < -100:
+		get_tree().reload_current_scene()
+		
+	previous_position = global_transform.origin
+	
+	very_funny -= delta
+	if very_funny < 0.0:
+		get_tree().reload_current_scene()
+	
+	# Raycast from viewport without needing a seperate node
+	var interaction_result = get_world().direct_space_state.intersect_ray($Camera.project_ray_origin(get_viewport().size / 2), $Camera.project_ray_origin(get_viewport().size / 2) + $Camera.project_ray_normal(get_viewport().size / 2) * 10.0)
+	
+	interaction_object = null
+	$InteractLabel.visible = false
+	if interaction_result != null:
+		if !interaction_result.empty():
+			if interaction_result["collider"].is_in_group("interactable"):
+				$InteractLabel.visible = true
+				interaction_object = interaction_result["collider"]
+	
+	if Input.is_action_just_pressed("interact") and interaction_object != null:
+		interaction_object.interact()
 		
 func on_collision(body):
 	if body.is_in_group("floor"):
@@ -248,4 +282,9 @@ func show_hitmarker():
 	hitmarker_timeout = 0.15
 
 func take_damage():
-	print("took damage")
+	health -= 25
+	if health <= 0.0:
+		get_tree().reload_current_scene()
+
+func play_sound(name, db):
+	Globals.play_sound(name, db)

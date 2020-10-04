@@ -58,7 +58,7 @@ sync = true
 sync = true
 
 [sub_resource type="AnimationNodeBlendTree" id=16]
-graph_offset = Vector2( -687, 44 )
+graph_offset = Vector2( -700.82, -74.2333 )
 nodes/Add2/node = SubResource( 4 )
 nodes/Add2/position = Vector2( -260, 100 )
 "nodes/Add2 3/node" = SubResource( 3 )
@@ -86,7 +86,7 @@ nodes/shoot/node = SubResource( 14 )
 nodes/shoot/position = Vector2( 360, 240 )
 nodes/shoot_l_state/node = SubResource( 15 )
 nodes/shoot_l_state/position = Vector2( -140, 360 )
-node_connections = [ "reload", 0, "shoot", "reload", 1, "Add2 3", "output", 0, "reload", "shoot", 0, "Add2", "shoot", 1, "shoot_l_state", "Add2", 0, "base_l_state", "Add2", 1, "Animation 2", "base_l_state", 0, "Animation 6", "base_l_state", 1, "Animation", "Add2 3", 0, "Animation 9", "Add2 3", 1, "Animation 10", "shoot_l_state", 0, "Animation 4", "shoot_l_state", 1, "Animation 3" ]
+node_connections = [ "reload", 0, "shoot", "reload", 1, "Add2 3", "output", 0, "reload", "Add2", 0, "base_l_state", "Add2", 1, "Animation 2", "base_l_state", 0, "Animation 6", "base_l_state", 1, "Animation", "shoot_l_state", 0, "Animation 4", "shoot_l_state", 1, "Animation 3", "Add2 3", 0, "Animation 9", "Add2 3", 1, "Animation 10", "shoot", 0, "Add2", "shoot", 1, "shoot_l_state" ]
 
 [sub_resource type="AnimationNodeAnimation" id=17]
 animation = "sliding"
@@ -1240,6 +1240,7 @@ tracks/9/keys = PoolRealArray( 0, 1, 1.19209e-07, 0, 0, -1.49012e-08, 2.22045e-1
 
 [sub_resource type="Animation" id=57]
 length = 0.683333
+step = 0.01
 tracks/0/type = "transform"
 tracks/0/path = NodePath("slide 2")
 tracks/0/interp = 1
@@ -1247,6 +1248,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = true
 tracks/0/enabled = true
 tracks/0/keys = PoolRealArray( 0, 1, -0.0169118, 0.172027, -0.00311844, 0, 0, 0, 1, 1, 1, 1, 0.0666667, 1, -0.0617647, 0.219929, 0.383596, 0, 0, 0, 1, 1, 1, 1, 0.6, 1, -0.0617647, 0.219929, 0.383596, 0, 0, 0, 1, 1, 1, 1, 0.666667, 1, -0.0215764, 0.177009, 0.0370998, 0, 0, 0, 1, 1, 1, 1, 0.683333, 1, -0.0169118, 0.172027, -0.00311844, 0, 0, 0, 1, 1, 1, 1 )
+tracks/1/type = "method"
+tracks/1/path = NodePath("../../../../../../../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.01, 0.2, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [ "GUN_RELEASE_AMMO.wav", -15 ],
+"method": "play_sound"
+}, {
+"args": [ "GUN_PISTOL_RELOAD.wav", -10 ],
+"method": "play_sound"
+}, {
+"args": [ "GUN_INSERT_AMMO.wav", 0 ],
+"method": "play_sound"
+} ]
+}
 
 [sub_resource type="Animation" id=58]
 length = 0.166667
@@ -2308,7 +2329,7 @@ bones/3/name = "bone_3"
 bones/3/parent = 2
 bones/3/rest = Transform( 0.985056, -0.155372, -0.074319, 0.171758, 0.854193, 0.490769, -0.0127688, -0.4962, 0.868115, 2.98023e-08, 0.27549, -4.78129e-08 )
 bones/3/enabled = true
-bones/3/bound_children = [  ]
+bones/3/bound_children = [ NodePath("BoneAttachment") ]
 bones/4/name = "bone_4"
 bones/4/parent = 3
 bones/4/rest = Transform( 0.996621, -0.0696689, -0.0435144, 0.0582355, 0.225678, 0.97246, -0.0579299, -0.971708, 0.228972, 1.49012e-08, 0.132359, -1.52737e-07 )
@@ -2436,6 +2457,24 @@ rect_rotation = -180.0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InteractLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -242.0
+margin_top = 50.0
+margin_right = -13.0
+margin_bottom = 85.0
+rect_scale = Vector2( 2, 2 )
+text = "PRESS E TO INTERACT"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

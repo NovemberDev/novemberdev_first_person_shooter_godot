@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/GUN_INSERT_AMMO.wav-edc14dcb0c35a92ac6ccc5170f8f904a.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/GUN_INSERT_AMMO.wav"
+dest_files=[ "res://.import/GUN_INSERT_AMMO.wav-edc14dcb0c35a92ac6ccc5170f8f904a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

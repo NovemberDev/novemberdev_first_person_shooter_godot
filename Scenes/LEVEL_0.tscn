@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=3]
@@ -85,6 +85,91 @@ adjustment_saturation = 1.1
 
 [sub_resource type="BoxShape" id=15]
 
+[sub_resource type="GDScript" id=24]
+script/source = "extends StaticBody
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+func interact():
+	LevelManager.raise_event(\"open_door_1\", { additional = \"infromation object\" })
+"
+
+[sub_resource type="BoxShape" id=16]
+
+[sub_resource type="CubeMesh" id=17]
+
+[sub_resource type="SpatialMaterial" id=18]
+albedo_color = Color( 0.054902, 1, 0, 1 )
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends Spatial
+
+
+# Inside the door object you call the open animation which does the rest
+
+func _ready():
+	LevelManager.connect(\"on_event_raised\", self, \"on_handle_door_event\")
+	
+func on_handle_door_event(event_arguments):
+	match event_arguments.name:
+		\"open_door_1\":
+			$AnimationPlayer.play(\"open\")
+	LevelManager.handle_event(event_arguments.name, { additional = \"information object\" })
+
+
+"
+
+[sub_resource type="BoxShape" id=20]
+
+[sub_resource type="CubeMesh" id=21]
+
+[sub_resource type="SpatialMaterial" id=22]
+albedo_color = Color( 0.266667, 0.431373, 1, 1 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "open"
+tracks/0/type = "transform"
+tracks/0/path = NodePath("StaticBody4")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = PoolRealArray(  )
+tracks/1/type = "value"
+tracks/1/path = NodePath("StaticBody4:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 2.20519, 0 ) ]
+}
+
+[sub_resource type="GDScript" id=25]
+script/source = "extends Area
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	connect(\"body_entered\", self, \"on_body_entered\")
+
+func on_body_entered(body):
+	LevelManager.raise_event(\"open_door_1\", { additional = \"infromation object\" })
+"
+
+[sub_resource type="BoxShape" id=26]
+
 [node name="LEVEL_0" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -98,6 +183,8 @@ material/0 = SubResource( 2 )
 [node name="StaticBody" type="StaticBody" parent="MeshInstance" groups=[
 "floor",
 ]]
+collision_layer = 19
+collision_mask = 2147483667
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.9958, 0 )
@@ -113,7 +200,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance21" groups=[
 "floor",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance21/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, -2.98023e-08, 0, 1, 0, -16.9958, 0 )
@@ -132,7 +220,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance2" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance2/StaticBody"]
 shape = SubResource( 5 )
@@ -147,7 +236,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance3" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance3/StaticBody"]
 shape = SubResource( 5 )
@@ -162,7 +252,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance11" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance11/StaticBody"]
 transform = Transform( 1, 0, -9.53674e-07, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
@@ -178,7 +269,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance12" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance12/StaticBody"]
 shape = SubResource( 5 )
@@ -193,7 +285,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance13" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance13/StaticBody"]
 shape = SubResource( 5 )
@@ -208,7 +301,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance15" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance15/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 9.31323e-10, 0, 1, 0, 0, 0 )
@@ -293,7 +387,8 @@ environment = SubResource( 7 )
 "wall",
 ]]
 transform = Transform( 26.1367, 0, 0, 0, 21.0828, 0, 0, 0, 1, 0, 27.1495, 9.02983 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 mesh = SubResource( 8 )
@@ -309,7 +404,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.356865, 0, 20.4435 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, 15.8245, 0, 0, 0, 1, 114.143, -34.9171, -170.431 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.74011 )
@@ -324,7 +420,8 @@ shape = SubResource( 11 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, -4.62967, 0, 0, 0, 1, 113.957, -7.69256, -161.775 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody3"]
 layers = 2
@@ -338,7 +435,8 @@ shape = SubResource( 11 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, -4.62967, 0, 0, 0, 1, 113.957, 46.1325, -161.775 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody4"]
 layers = 2
@@ -352,7 +450,8 @@ shape = SubResource( 11 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, -4.62967, 0, 0, 0, 1, 113.957, 10.4823, -161.775 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.184727, 0 )
@@ -367,7 +466,8 @@ shape = SubResource( 11 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, -4.62967, 0, 0, 0, 1, 113.957, 28.4357, -161.775 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody7"]
 layers = 2
@@ -381,7 +481,8 @@ shape = SubResource( 11 )
 "wall",
 ]]
 transform = Transform( 23.6662, 0, 0, 0, -49.8084, 0, 0, 0, 1, 113.957, 110.098, -161.775 )
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="Mid/StaticBody5"]
 layers = 2
@@ -401,7 +502,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance4" groups=[
 "floor",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance4/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16.9958, 0 )
@@ -417,7 +519,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance14" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance14/StaticBody"]
 transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, -2.32831e-10, 0, 1, 0, 0, 0 )
@@ -433,7 +536,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance16" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance16/StaticBody"]
 shape = SubResource( 5 )
@@ -448,7 +552,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance18" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance18/StaticBody"]
 shape = SubResource( 5 )
@@ -463,7 +568,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance19" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance19/StaticBody"]
 shape = SubResource( 5 )
@@ -478,7 +584,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="Mid/MeshInstance20" groups=[
 "wall",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="Mid/MeshInstance20/StaticBody"]
 shape = SubResource( 5 )
@@ -491,7 +598,8 @@ material/0 = null
 [node name="StaticBody" type="StaticBody" parent="MeshInstance4" groups=[
 "floor",
 ]]
-collision_layer = 2
+collision_layer = 19
+collision_mask = 19
 
 [node name="CollisionShape" type="CollisionShape" parent="MeshInstance4/StaticBody"]
 shape = SubResource( 13 )
@@ -500,6 +608,8 @@ shape = SubResource( 13 )
 "grapple",
 ]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40.5769, 25.2817 )
+collision_layer = 19
+collision_mask = 19
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
 mesh = SubResource( 14 )
@@ -542,3 +652,39 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.14845, 0, -14.4504 )
 
 [node name="Spatial7" type="Spatial" parent="Enemy_Group_1/PATROLLING_WAYPOINTS"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.66919, 0, -14.4504 )
+
+[node name="Button" type="StaticBody" parent="." groups=[
+"interactable",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5582, 4.12479, 45.0425 )
+script = SubResource( 24 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Button"]
+shape = SubResource( 16 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Button"]
+mesh = SubResource( 17 )
+material/0 = SubResource( 18 )
+
+[node name="Door" type="Spatial" parent="."]
+transform = Transform( 8.28807, 0, 0, 0, 6.5099, 0, 0, 0, 1, 0, 7.16477, 16.6907 )
+script = SubResource( 19 )
+
+[node name="StaticBody4" type="StaticBody" parent="Door"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Door/StaticBody4"]
+shape = SubResource( 20 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Door/StaticBody4"]
+mesh = SubResource( 21 )
+material/0 = SubResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door"]
+anims/open = SubResource( 23 )
+
+[node name="Area" type="Area" parent="."]
+transform = Transform( 6.94295, 0, 0, 0, 8.36515, 0, 0, 0, 7.67436, 13.037, 10.5617, 36.6277 )
+script = SubResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+shape = SubResource( 26 )

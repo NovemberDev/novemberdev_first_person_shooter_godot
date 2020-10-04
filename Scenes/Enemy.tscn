@@ -617,7 +617,7 @@ input_1/name = "dead"
 input_1/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=20]
-graph_offset = Vector2( -500, -117 )
+graph_offset = Vector2( -413, -314 )
 nodes/Animation/node = SubResource( 16 )
 nodes/Animation/position = Vector2( -320, 100 )
 "nodes/Animation 2/node" = SubResource( 13 )
@@ -719,7 +719,7 @@ bones/12/enabled = true
 bones/12/bound_children = [  ]
 
 [node name="BoneAttachment" type="BoneAttachment" parent="mob/Armature/Skeleton"]
-transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.04511, 1.75568 )
+transform = Transform( -0.997343, 0.0708213, 0.0170154, 0.0385078, 0.314388, 0.948512, 0.0618268, 0.946649, -0.316281, -0.798048, 2.72894, 1.75568 )
 bone_name = "bone_3"
 
 [node name="BULLET_SLOT" type="Spatial" parent="mob/Armature/Skeleton/BoneAttachment"]
